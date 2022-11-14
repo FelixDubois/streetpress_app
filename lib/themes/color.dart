@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+class StreetPressColors {
+  static const Color blue = Color(0xFF1D4EFF);
+  static const Color yellow = Color(0xFFFEF783);
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0xFF000000);
+}
+
+/*
 const primaryColor = Color(0xFFb71c1c);
 const primaryColorLight = Color(0xFFf05545);
 const primaryColorDark = Color(0xFF7f0000);
@@ -34,3 +42,4 @@ class StreetPressTheme {
     );
   }
 }
+*/

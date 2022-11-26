@@ -3,7 +3,10 @@ import 'package:optimized_cached_image/optimized_cached_image.dart';
 import 'package:streetpress/articles/models/article.dart';
 import 'package:intl/intl.dart';
 import 'package:streetpress/authors/models/author.dart';
+import 'package:streetpress/bookmark/services/bookmark.dart';
+import 'package:streetpress/bookmark/widgets/bookmark.dart';
 import 'package:streetpress/themes/color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleTile extends StatefulWidget {
   const ArticleTile({super.key, required Article article}) : _article = article;
@@ -19,11 +22,13 @@ class _ArticleTileState extends State<ArticleTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("\"" + widget._article.title + "\" clicked");
+        Uri url = Uri.parse(
+            "https://www.streetpress.com/sujet/${widget._article.alias}");
+        launchUrl(url, mode: LaunchMode.externalApplication);
       },
       child: Container(
         width: double.infinity,
-        height: 200,
+        height: 225,
         color: StreetPressColors.black,
         child: Stack(
           alignment: Alignment.center,
@@ -33,7 +38,22 @@ class _ArticleTileState extends State<ArticleTile> {
             generateSubtitle(widget._article.subTitle),
             generateDate(widget._article.date),
             generateAuthors(widget._article.authors),
+            generateBookmark(widget._article.vid),
           ],
+        ),
+      ),
+    );
+  }
+
+  Padding generateBookmark(vid) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15),
+      child: Align(
+        alignment: Alignment.topRight,
+        child: BookmarkButton(
+          vid: vid,
+          json: widget._article.json,
+          type: Type.article,
         ),
       ),
     );
@@ -120,7 +140,7 @@ class _ArticleTileState extends State<ArticleTile> {
               alignment: Alignment.bottomLeft,
               child: GestureDetector(
                 onTap: () {
-                  print("\"" + authors[index].name + "\" clicked");
+                  //print("\"" + authors[index].name + "\" clicked");
                 },
                 child: Text(
                   authors[index].name,

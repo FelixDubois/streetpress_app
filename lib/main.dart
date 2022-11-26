@@ -1,10 +1,12 @@
+// Folder structure : https://medium.com/flutter-community/scalable-folder-structure-for-flutter-applications-183746bdc320
 import 'package:flutter/material.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:streetpress/bottom_bar/widgets/bottom_bar.dart';
+import 'package:streetpress/pages/bookmark_page.dart';
 import 'package:streetpress/pages/home_page.dart';
 import 'package:streetpress/pages/money_page.dart';
+import 'package:streetpress/pages/videos_page.dart';
 import 'package:streetpress/top_bar/widgets/top_bar.dart';
-// Folder structure : https://medium.com/flutter-community/scalable-folder-structure-for-flutter-applications-183746bdc320
 
 void main() {
   runApp(
@@ -15,16 +17,16 @@ void main() {
   );
 }
 
+List<Widget> pages = const [
+  HomePage(),
+  VideoPage(),
+  //Center(child: Text('Search')),
+  BookmarkPage(),
+  MoneyPage(),
+];
+
 class MyApp extends StatefulWidget {
   final PageController pageController = PageController(initialPage: 0);
-
-  final List<Widget> pages = const [
-    HomePage(),
-    Center(child: Text('Videos')),
-    Center(child: Text('Search')),
-    Center(child: Text('Map')),
-    MoneyPage(),
-  ];
 
   MyApp({super.key});
 
@@ -55,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           body: PageView(
             physics: const NeverScrollableScrollPhysics(),
             controller: widget.pageController,
-            children: widget.pages,
+            children: pages,
           ),
           bottomNavigationBar: BottomBar(pageController: widget.pageController),
         ),

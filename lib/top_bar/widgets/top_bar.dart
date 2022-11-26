@@ -16,10 +16,10 @@ class _TopBarState extends State<TopBar> {
       title: Center(
         child: Image.asset(
           "assets/images/head_logo.png",
-          scale: 2.5,
+          scale: 1.5,
         ),
       ),
-      leading: IconButton(
+      /*leading: IconButton(
         icon: const Icon(
           Icons.menu,
           color: StreetPressColors.black,
@@ -34,7 +34,7 @@ class _TopBarState extends State<TopBar> {
           ),
           onPressed: () {},
         ),
-      ],
+      ],*/
     );
   }
 }

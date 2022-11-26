@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:streetpress/articles/models/article.dart';
-import 'package:streetpress/articles/services/fetch_articles.dart';
-import 'package:streetpress/articles/widgets/article_tile.dart';
 import 'package:streetpress/themes/color.dart';
+import 'package:streetpress/videos/models/video.dart';
+import 'package:streetpress/videos/services/fetch_videos.dart';
+import 'package:streetpress/videos/widgets/video_tile.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class VideoPage extends StatefulWidget {
+  const VideoPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<VideoPage> createState() => _VideoPageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _VideoPageState extends State<VideoPage>
     with AutomaticKeepAliveClientMixin {
-  late Future<List<Article>> futureArticles;
-  List<Article> fetchedArticles = [];
+  late Future<List<Video>> futureVideos;
+  List<Video> fetchedVideos = [];
 
   var page = 0;
   ScrollController controller = ScrollController();
@@ -26,12 +26,12 @@ class _HomePageState extends State<HomePage>
     // When the user scrolls to the bottom of the page, fetch more articles
     if (controller.offset >= controller.position.maxScrollExtent &&
         !controller.position.outOfRange) {
-      fetchArticles(page + 1).then(
+      fetchVideos(page + 1).then(
         (value) => {
-          fetchedArticles.addAll(value),
+          fetchedVideos.addAll(value),
           setState(() {
             page++;
-            futureArticles = Future.value(fetchedArticles);
+            futureVideos = Future.value(fetchedVideos);
           })
         },
       );
@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage>
 
     controller.addListener(_scrollListener);
 
-    futureArticles = fetchArticles(page);
-    futureArticles.then((value) => fetchedArticles = value);
+    futureVideos = fetchVideos(page);
+    futureVideos.then((value) => fetchedVideos = value);
   }
 
   @override
@@ -62,8 +62,8 @@ class _HomePageState extends State<HomePage>
       height: double.infinity,
       color: StreetPressColors.yellow,
       child: Center(
-        child: FutureBuilder<List<Article>>(
-          future: futureArticles,
+        child: FutureBuilder<List<Video>>(
+          future: futureVideos,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Scrollbar(
@@ -71,8 +71,8 @@ class _HomePageState extends State<HomePage>
                   controller: controller,
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    return ArticleTile(
-                      article: snapshot.data![index],
+                    return VideoTile(
+                      video: snapshot.data![index],
                     );
                   },
                 ),

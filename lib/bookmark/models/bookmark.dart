@@ -18,10 +18,4 @@ class Author {
       imageUrl: json['realpathpicture'],
     );
   }
-
-  Map<String, dynamic> toJson() => {
-        'url': url,
-        'name': name,
-        'imageUrl': imageUrl,
-      };
 }

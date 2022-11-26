@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:streetpress/themes/color.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MoneyPage extends StatefulWidget {
   const MoneyPage({super.key});
@@ -8,7 +9,11 @@ class MoneyPage extends StatefulWidget {
   State<MoneyPage> createState() => _MoneyPageState();
 }
 
-class _MoneyPageState extends State<MoneyPage> {
+class _MoneyPageState extends State<MoneyPage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
@@ -16,6 +21,8 @@ class _MoneyPageState extends State<MoneyPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Center(
       child: Container(
         width: double.infinity,
@@ -47,12 +54,21 @@ class ExternalLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Text(
-        "VOIR COMMENT STREETPRESS DÉPENSE VOS DONS",
-        style: TextStyle(
-          decoration: TextDecoration.underline,
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          textStyle: const TextStyle(
+            decoration: TextDecoration.underline,
+          ),
+          foregroundColor: StreetPressColors.black,
         ),
+        onPressed: () {
+          launchUrlString(
+            "https://backend.streetpress.com/sites/default/files/rapport-impact-streetpress-20222.pdfz",
+            mode: LaunchMode.externalApplication,
+          );
+        },
+        child: const Text("VOIR COMMENT STREETPRESS UTILISE VOS DONS"),
       ),
     );
   }
@@ -69,16 +85,21 @@ class Donate extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Container(
-            height: 80,
-            color: StreetPressColors.blue,
-            child: const Center(
-              child: Text(
-                "REGARDER UNE PUB\nDE 30 SECONDES",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: StreetPressColors.yellow,
-                  fontSize: 20,
+          child: GestureDetector(
+            onTap: () {
+              //print("Watch Ad");
+            },
+            child: Container(
+              height: 80,
+              color: StreetPressColors.blue,
+              child: const Center(
+                child: Text(
+                  "REGARDER UNE PUB\nDE 30 SECONDES",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: StreetPressColors.yellow,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
@@ -86,26 +107,34 @@ class Donate extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            height: 80,
-            color: StreetPressColors.blue,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  const Text(
-                    "FAIRE UN DON",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: StreetPressColors.yellow,
-                      fontSize: 20,
+          child: GestureDetector(
+            onTap: () {
+              launchUrlString(
+                "https://www.streetpress.com/soutenir",
+                mode: LaunchMode.externalApplication,
+              );
+            },
+            child: Container(
+              height: 80,
+              color: StreetPressColors.blue,
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    const Text(
+                      "FAIRE UN DON",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: StreetPressColors.yellow,
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    "assets/images/CB.png",
-                    height: 40,
-                  ),
-                ],
+                    Image.asset(
+                      "assets/images/CB.png",
+                      height: 40,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

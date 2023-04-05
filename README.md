@@ -1,16 +1,12 @@
-# streetpress
+# streetpress app
 
-A new Flutter project.
+This is a mobile app to easely access to the new streetpress's arcticles and videos.
 
-## Getting Started
+There is 3 section :
 
-This project is a starting point for a Flutter application.
+![1680676182628](image/README/1680676182628.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+You can lauch the app with `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Or build it with `flutter build apk` in order to compile for android.

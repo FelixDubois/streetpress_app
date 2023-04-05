@@ -1,5 +1,9 @@
 // Folder structure : https://medium.com/flutter-community/scalable-folder-structure-for-flutter-applications-183746bdc320
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:streetpress/bottom_bar/widgets/bottom_bar.dart';
 import 'package:streetpress/pages/bookmark_page.dart';
@@ -8,7 +12,11 @@ import 'package:streetpress/pages/money_page.dart';
 import 'package:streetpress/pages/videos_page.dart';
 import 'package:streetpress/top_bar/widgets/top_bar.dart';
 
-void main() {
+Future<void> main() async {
+  // Force the portrait mode
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(
     DevicePreview(
         enabled: false,

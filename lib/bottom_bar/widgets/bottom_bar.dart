@@ -36,7 +36,7 @@ class _BottomBarState extends State<BottomBar> {
           label: 'Saved',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.money),
+          icon: Icon(Icons.volunteer_activism),
           label: 'Money',
         ),
       ],
